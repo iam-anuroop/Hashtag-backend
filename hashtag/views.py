@@ -10,7 +10,6 @@ from drf_yasg import openapi
 from django.utils import timezone
 
  
-
 class ManageHashtags(APIView):
     @swagger_auto_schema(
         tags=["Get top Hashtag"],
@@ -45,9 +44,7 @@ class ManageHashtags(APIView):
             for post in posts:
                 hashtags = re.findall(r'#\w+', post.content)
                 count_hashtag.update(hashtags)
-
             top_hashtags = count_hashtag.most_common(5)
-
             return Response({"top_hashtags": top_hashtags},status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"msg":"something went wrong"},status=status.HTTP_400_BAD_REQUEST)
